@@ -16,6 +16,7 @@ function Base(props) {
     const [loading, setLoading] = useState(true);
     const [habits, setHabits] = useState([]);
     useEffect(() => {
+        console.log(props.user)
         fetch(`/habits/filter?userEmail=${props.user.email}`)
             .then(res => res.json())
             .then(hab => {
@@ -43,9 +44,9 @@ function Base(props) {
                         </div>
                         <ul className="navbar-nav profile centrado-v">
                             <li className="nav-item dropdown">
-                                <img className="profile dropdown-toggle" alt="mini profile" src={props.user.image ? props.user.image : defaultPhoto} role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+                                <img className="profile dropdown-toggle" alt="mini profile" src={props.user.photo ? props.user.photo : defaultPhoto} role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
                                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="profileMenu">
-                                    <a className="dropdown-item" href="/profile">Mi Perfil</a>
+                                    <a className="dropdown-item" href="/platform/profile">Mi Perfil</a>
                                     <a className="dropdown-item" onClick={() => fetch("/auth/logout")} href="/login">Cerrar Sesion</a>
 
                                 </div>

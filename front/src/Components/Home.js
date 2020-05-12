@@ -1,18 +1,18 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from "prop-types";
 import DiaryCard from "./DiaryCard"
 import Habit from './Habit'
 
 function Home(props) {
 
-    const [habit, setHabit] = useState({
-        title: "ToJog",
-        description: "Meditate every day",
-        isDaily: true,
-        userEmail: "jm.contreras10@uniandes.edu.co",
-        inputType: "number",
-        goalValue: null
-    })
+    const [habit, setHabit] = useState({})
+    const [select, setSelect]= useState(0)
+
+    useEffect(()=>{
+        let a = props.habits.filter((e) => e.inputType === "number")
+        console.log(a[0]);
+        setHabit(a[0]);
+    },[props.habits])
 
     return (
         <div className="Home">
@@ -35,7 +35,17 @@ function Home(props) {
                     </div>
                 </div>
                 <div className="col-md-6 col-12">
-                    <Habit habit={habit} userEmail={props.user.userEmail} />
+                    <div className="select">
+                        <label>Selecciona que grafico ver</label>
+                        <select name="subarea"value={select} onChange={e =>{console.log(e.target.value); setSelect(e.target.value);setHabit(props.habits[e.target.value])}}>
+                            {
+                                props.habits.filter((e)=>e.inputType==="number").map((ele, i)=>
+                                    <option value={i} key={`select ${i}`}>{ele.title}</option>
+                                )
+                            }
+                        </select>
+                    </div>
+                    <Habit habit={habit} />
                 </div>
             </div>
         </div>

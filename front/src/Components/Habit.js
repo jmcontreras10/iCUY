@@ -8,8 +8,10 @@ const Habit = (props) => {
     const [records, setRecords] = useState(null)
 
     useEffect(() => {
-        fetchRecords()
-    }, [])
+        console.log(props.habit)
+        if(props.habit)
+            fetchRecords()
+    }, [props.habit])
 
     const fetchRecords = () => {
         const url = `/records/filter?habitTitle=${props.habit.title}&userEmail=${props.habit.userEmail}`

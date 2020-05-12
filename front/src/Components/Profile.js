@@ -46,7 +46,7 @@ function Profile(props) {
             <div className="card profile-info">
                 <div className="row">
                     <div className="photo">
-                        <img className="centrado-h" alt="foto de perfil" src={props.user.image ? props.user.image : defaultPhoto}></img>
+                        <img className="centrado-h" alt="foto de perfil" src={props.user.photo ? props.user.photo : defaultPhoto}></img>
                         <button className="btn btn-primary edit centrado-h">
                             <FiEdit3 /> Editar
                         </button>

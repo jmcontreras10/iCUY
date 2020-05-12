@@ -12,9 +12,11 @@ exports.create = async (req, res) => {
 
   const inputHabit = req.body;
   let errMessage;
-
   if (!inputHabit.title)
     errMessage = "Title is required";
+
+  if (!inputHabit.subarea)
+    errMessage = "subarea is required";
 
   if (!inputHabit.isDaily && !errMessage)
     inputHabit.isDaily = false;
@@ -26,7 +28,7 @@ exports.create = async (req, res) => {
     errMessage = await validateEmail(inputHabit.userEmail);
 
   //  TODO: ( userEmail ) must exists and be valid - V5
-
+  console.log(errMessage,inputHabit)
   if (!errMessage) {
     const habit = new Habit(inputHabit);
     habit.addNew()
@@ -60,14 +62,12 @@ exports.getAll = (req, res) => {
  * This allows to gett All habits with filter in the db
  */
 exports.getFilter = (req, res) => {
-  console.log("filter");
   //  Title filter
   const title = req.query.title;
   //  userEmail filter
   const userEmail = req.query.userEmail;
   fetchFilter(title, userEmail)
     .then(habits => {
-      console.log(habits);
       res.status(200).json(habits);
     })
     .catch(err => {

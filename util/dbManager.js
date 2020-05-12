@@ -14,7 +14,6 @@ const mongoConnect = async () => {
   const url = `mongodb+srv://${envUser}:${envPass}@${envUrl}?retryWrites=true&w=majority`;
   client = new MongoClient(url, { useNewUrlParser: true , useUnifiedTopology: true });
   await client.connect();
-  console.log("Connected!");
 
 };
 
@@ -26,7 +25,6 @@ const getDb = () => {
 //  Close conection
 const closeDb = () => {
   client.close();
-  console.log("Disconected!");
 };
 
 exports.mongoConnect = mongoConnect;

@@ -29,7 +29,6 @@ const Habit = (props) => {
                 return res.json()
             })
             .then(habits => {
-                console.log('habits',habits)
                 setHabit(habits[0])
             })
     }
@@ -51,14 +50,12 @@ const Habit = (props) => {
                 return res.json()
             })
             .then(records => {
-                console.log('records',records)
                 let format =  records.map(record => {
                         return {
                             date: record.date,
                             value: record.value
                         }
                     });
-            console.log(format);
                 setRecords(format)
             })
     }

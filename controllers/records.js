@@ -51,7 +51,6 @@ exports.create = async (req, res) => {
 exports.getAll = (req, res) => {
   fetchAll()
     .then(habits => {
-      console.log("Usuario creado");
       res.status(200).json(habits);
     })
     .catch(err => {

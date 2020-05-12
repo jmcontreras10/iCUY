@@ -43,11 +43,9 @@ passport.use(new GoogleStrategy({
   callbackURL: "https://icuy.herokuapp.com/auth/google/callback"
 },
 async function (accessToken, refreshToken, profile, cb) {
-  console.log(accessToken, refreshToken, profile);
   let user = profile["_json"];
   return await fetchFilter(user.email).then(async users => {
     if (users.length > 0) {
-      console.log("ya registrado");
       return cb(null, user.email);
     }
     else {
@@ -57,7 +55,6 @@ async function (accessToken, refreshToken, profile, cb) {
         photo: user.picture,
         isGoogle:true
       };
-      console.log("nuevo",data);
       return await createUser(data).then(() => {
         return cb(null, user.email);
       }).catch(err=>{          
@@ -69,12 +66,10 @@ async function (accessToken, refreshToken, profile, cb) {
 ));
 
 passport.serializeUser(function (user, cb) {
-  console.log("serialize",user);
   cb(null, user);
 });
 
 passport.deserializeUser(function (username, cb) {
-  console.log("deserialize", username);
 
   fetchFilter(username).then(users => {
     const user = users.length > 0 ? users[0] : undefined;

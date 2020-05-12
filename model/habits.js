@@ -21,7 +21,7 @@ class Habit {
          * If the Habit must have a record daily
          * (false if undefined)
          */
-    this.isDaily = habit.isDaily;
+    this.isDaily = habit.isDaily === "true" || habit.isDaily === true?true:false;
 
     /**
          * Uses that have that specific Habit
@@ -42,6 +42,8 @@ class Habit {
          */
     this.goalValue = habit.goalValue;
 
+    this.subarea = parseInt(habit.subarea);
+
     /**
          * For the Unique value, the database actually verifies if (title, userEmail) to be unique
          */
@@ -52,13 +54,27 @@ class Habit {
     //  Getting Database
     const db = getDb();
     //  Returning response from habit creation
-    return db
-      .collection("habits")
-      .insertOne(this)
-      .then()
-      .catch(err => {
-        return err;
-      });
+    return fetchFilter(this.title,this.userEmail).then(res => {
+      console.log(res, this);
+      if (res.length > 0) {
+        return db
+          .collection("habits")
+          .updateOne({ _id: res[0]._id }, { $set: this }, { upsert: true })
+          .then()
+          .catch(err => {
+            return err;
+          });
+      }
+      else {
+        return db
+          .collection("habits")
+          .insertOne(this)
+          .then()
+          .catch(err => {
+            return err;
+          });
+      }
+    });
   }
 
 }

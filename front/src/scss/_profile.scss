@@ -49,6 +49,9 @@
             padding: 20px;
             overflow: hidden;
             min-height: 400px;
+            hr{
+                border-color:rgba(0, 0, 0, 0.3) ;
+            }
             .header {
                 position: relative;
                 height: 40px;
@@ -72,17 +75,37 @@
                     margin-top: -1rem;
                     width: 100%;
                     .habit {
-                        padding: 1rem;
-                        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-                        cursor: pointer;
+                        padding: 0 20px;
+                        .habit-item {
+                            text-align: center;
+                            color: $tertiary;
+                            padding: 0.5rem;
+                            border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+                            cursor: pointer;
+                            transition: 0.3s;
+                            &:hover {
+                               font-size: 18px ;
+                            }
+                        }
+                        &:nth-child(odd) {
+                            border-right: 1px solid rgba(0, 0, 0, 0.1);
+                        }
+                    }
+                }
+                .edit {
+                    margin: 20px 0;
+                    transition: 1s;
+                    .btn{
+                        float: right;
+                        margin: 20px 10px;
                     }
                 }
             }
-            .edit {
-                position: absolute;
-                height: 50%;
-                bottom: -100%;
-            }
+        }
+    }
+    .checkbox{
+        label{
+            width: 100%;
         }
     }
     .inputBox {
@@ -90,30 +113,27 @@
 
         input {
             width: 100%;
-            padding: 10px 0;
+            padding: 0px 0;
             font-size: 16px;
-            margin-bottom: 30px;
-            color: #ffffff;
-            border: none;
-            border-bottom: 1px solid #fff;
+            margin-bottom: 25px;
+            color: $tertiary;
+            border: 1px solid rgba(0,0,0);
             outline: none;
             background: transparent;
             &:focus ~ label,
             &:valid ~ label {
                 top: -20px;
                 left: 0;
-                color: $secondary;
-                font-size: 12px;
+                font-size: 14px;
             }
         }
 
         label {
             position: absolute;
             top: 0;
-            left: 0;
-            padding: 10px 0;
+            left: 10px;
             font-size: 16px;
-            color: #fff;
+            color: $tertiary;
             pointer-events: none;
             transition: 0.5s;
         }

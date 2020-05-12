@@ -26,7 +26,6 @@ class Record {
     //  Getting Database
     const db = getDb();
     return fetchFilter(this.date, this.habitTitle, this.userEmail).then(res=>{
-      console.log(res,this);
       if(res.length>0){
         return db
           .collection("records")

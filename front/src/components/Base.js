@@ -3,8 +3,7 @@ import {
     Switch,
     Route,
     useLocation,
-    Redirect,
-    Link
+    Redirect
 } from "react-router-dom";
 import PropTypes from "prop-types";
 import Home from "./Home";
@@ -13,7 +12,7 @@ import Profile from "./Profile";
 import logo from "../assets/icuymaslogo.png";
 import defaultPhoto from "../assets/user.png"
 function Base(props) {
-    const [location, setLocation] = useState(useLocation().pathname);
+    const [location] = useState(useLocation().pathname);
     const [loading, setLoading] = useState(true);
     const [habits, setHabits] = useState([]);
     useEffect(() => {
@@ -23,7 +22,7 @@ function Base(props) {
                 setHabits(hab);
                 setLoading(false);
             })
-    }, []);
+    }, [props.user]);
     return (
         <>
             {props.user.nuevo ? '' :
@@ -35,13 +34,10 @@ function Base(props) {
                         <div className="links centrado-v">
                             <ul className="navbar-nav">
                                 <li className="nav-item">
-                                    <Link className={`nav-link ${location == "/platform" ? 'active' : ''}`} to="/platform">Inicio</Link>
+                                    <a className={`nav-link ${location === "/platform" ? 'active' : ''}`} href="/platform">Inicio</a>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className={`nav-link ${location == "/platform/profile"?'active':''}`} to="/platform/profile">Perfil</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className={`nav-link ${location == "/platform/habits" ? 'active' : ''}`}  to="/platform/habits">Mis Habitos</Link>
+                                    <a className={`nav-link ${location === "/platform/profile"?'active':''}`} href="/platform/profile">Perfil</a>
                                 </li>
                             </ul>
                         </div>
@@ -61,13 +57,13 @@ function Base(props) {
                     <Profile user={props.user} solicitudes={solicitudes}/>
                 </Route> */}
                         <Route path="/platform/profile">
-                            <Profile user={props.user} habits={habits} loading={loading} location={setLocation} />
+                            <Profile user={props.user} habits={habits} loading={loading} />
                         </Route>
                         <Route path="/platform/*">
                              <Redirect to="/platform" />
                         </Route>
                         <Route path="/platform">
-                            <Home user={props.user} habits={habits} loading={loading} location={setLocation}/>
+                            <Home user={props.user} habits={habits} loading={loading} />
                         </Route>
                     </Switch>
                 </>

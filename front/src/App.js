@@ -20,7 +20,6 @@ function App() {
     fetch("/auth/user")
       .then(res => res.json())
       .then(usr => {
-        console.log(usr);
         setUser(usr);
         setLoading(false);
       })

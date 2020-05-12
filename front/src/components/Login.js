@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 function Login() {
-    console.log("login")
     const [registered, setRegistered] = useState(true);
     if (registered) {
         return (

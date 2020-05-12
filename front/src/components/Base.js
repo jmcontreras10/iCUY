@@ -35,13 +35,13 @@ function Base(props) {
                         <div className="links centrado-v">
                             <ul className="navbar-nav">
                                 <li className="nav-item">
-                                    <Link className={`nav-link ${location == "/platform" ? 'active' : ''}`} to="/platform">Inicio</Link>
+                                    <Link className={`nav-link ${location === "/platform" ? 'active' : ''}`} to="/platform">Inicio</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className={`nav-link ${location == "/platform/profile"?'active':''}`} to="/platform/profile">Perfil</Link>
+                                    <Link className={`nav-link ${location === "/platform/profile"?'active':''}`} to="/platform/profile">Perfil</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className={`nav-link ${location == "/platform/habits" ? 'active' : ''}`}  to="/platform/habits">Mis Habitos</Link>
+                                    <Link className={`nav-link ${location === "/platform/habits" ? 'active' : ''}`}  to="/platform/habits">Mis Habitos</Link>
                                 </li>
                             </ul>
                         </div>

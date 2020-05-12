@@ -6,8 +6,21 @@ import {
 } from "react-router-dom";
 import PropTypes from "prop-types";
 import DiaryCard from "./DiaryCard"
+import Habit from './Habit'
+
 function Home(props) {
+
+    const [habit, setHabit] = useState({
+        title: "ToMeditate",
+        description: "Meditate every day",
+        isDaily: true,
+        userEmail: "jm.contreras10@uniandes.edu.co",
+        inputType: "checkbox",
+        goalValue: null
+    })
+
     props.location(useLocation().pathname)
+
     return (
         <div className="Home">
             <div className="row">
@@ -29,7 +42,7 @@ function Home(props) {
                     </div>
                 </div>
                 <div className="col-md-6 col-12">
-
+                    <Habit habit={habit} userEmail={props.user.userEmail} />
                 </div>
             </div>
         </div>
@@ -38,8 +51,8 @@ function Home(props) {
 Home.propTypes = {
     user: PropTypes.object.isRequired,
     habits: PropTypes.array.isRequired,
-    loading:PropTypes.bool.isRequired,
-    location:PropTypes.func.isRequired
+    loading: PropTypes.bool.isRequired,
+    location: PropTypes.func.isRequired
 }
 
 export default Home;

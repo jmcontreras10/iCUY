@@ -44,17 +44,17 @@ const DiaryCard = (props) => {
     useEffect(() => {
         let copy = { ...inputs }
         let sortHabits = (a, b) => {
-            if (a.inputType == b.inputType)
+            if (a.inputType === b.inputType)
                 return 0
             return a.inputType > b.inputType ? 1 : -1
         }
         let count = 0;
         let data = props.habits
-            .filter(h => h.isDaily && h.goalValue == areas[props.area].codigos[0])
+            .filter(h => h.isDaily && h.goalValue === areas[props.area].codigos[0])
             .sort(sortHabits);
-        count += data.length == 0 ? 0 : 1;
+        count += data.length === 0 ? 0 : 1;
         data.map(ele => {
-            if (copy[ele.title] == undefined) {
+            if (copy[ele.title] === undefined) {
                 let value;
                 switch (ele.inputType) {
                     case 'number':
@@ -76,11 +76,11 @@ const DiaryCard = (props) => {
         });
         setFisrt(data);
         data = props.habits
-            .filter(h => h.isDaily && h.goalValue == areas[props.area].codigos[1])
+            .filter(h => h.isDaily && h.goalValue === areas[props.area].codigos[1])
             .sort(sortHabits);
-        count += data.length == 0 ? 0 : 1;
+        count += data.length === 0 ? 0 : 1;
         data.map(ele => {
-            if (copy[ele.title] == undefined) {
+            if (copy[ele.title] === undefined) {
                 let value;
                 switch (ele.inputType) {
                     case 'number':
@@ -102,11 +102,11 @@ const DiaryCard = (props) => {
         });
         setSecond(data);
         data = props.habits
-            .filter(h => h.isDaily && h.goalValue == areas[props.area].codigos[2])
+            .filter(h => h.isDaily && h.goalValue === areas[props.area].codigos[2])
             .sort(sortHabits);
-        count += data.length == 0 ? 0 : 1;
+        count += data.length === 0 ? 0 : 1;
         data.map(ele => {
-            if (copy[ele.title] == undefined) {
+            if (copy[ele.title] === undefined) {
                 let value;
                 switch (ele.inputType) {
                     case 'number':
@@ -154,11 +154,11 @@ const DiaryCard = (props) => {
 
     const defineSubarea = (num, data) => {
         if (data.length > 0) {
-            let tamano = (available == 3 && num != 3) ? 6 : 12;
+            let tamano = (available === 3 && num != 3) ? 6 : 12;
             let col1, col2 = [];
-            if (tamano == 12) {
-                col1 = data.filter((ele, i) => i % 2 == 0)
-                col2 = data.filter((ele, i) => i % 2 == 1)
+            if (tamano === 12) {
+                col1 = data.filter((ele, i) => i % 2 === 0)
+                col2 = data.filter((ele, i) => i % 2 === 1)
             }
             return (
                 <div className={`col-${tamano} subarea`}>
@@ -169,7 +169,7 @@ const DiaryCard = (props) => {
                     </div>
                     <div className="row">
                         {
-                            tamano == 12 ? (
+                            tamano === 12 ? (
                                 <>
                                     <div className="col-6 pr">
                                         {
@@ -231,7 +231,7 @@ const DiaryCard = (props) => {
     }
     return (
         <div className=" DiaryCard card">
-            <div className={`card-header ${props.area == 0 ? "" : "collapsed"}`} data-toggle="collapse" data-target={`#collapse${props.area}`} aria-expanded="true" aria-controls={`collapse${props.area}`} tabIndex={0}>
+            <div className={`card-header ${props.area === 0 ? "" : "collapsed"}`} data-toggle="collapse" data-target={`#collapse${props.area}`} aria-expanded="true" aria-controls={`collapse${props.area}`} tabIndex={0}>
                 <h2 className="centrado-v title">
                     {areas[props.area].title}
                 </h2>
@@ -242,12 +242,12 @@ const DiaryCard = (props) => {
                     <FaChevronUp />
                 </div>
             </div>
-            <div id={`collapse${props.area}`} className={`collapse ${props.area == 0 ? "show" : ""}`} aria-labelledby={`heading${props.area}`} data-parent="#DiaryAreas">
+            <div id={`collapse${props.area}`} className={`collapse ${props.area === 0 ? "show" : ""}`} aria-labelledby={`heading${props.area}`} data-parent="#DiaryAreas">
 
                 <div className="card-body">
                     <div className="row subareas no-gutters">
                         {
-                            first.length == 0 && second.length == 0 && third.length == 0 ?
+                            first.length === 0 && second.length === 0 && third.length === 0 ?
                                 <div className="col empty">
                                     <div className="empty-icon centrado-h fit">
                                         <MdErrorOutline/>

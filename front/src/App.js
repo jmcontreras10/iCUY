@@ -10,7 +10,6 @@ import "./scss/styles.scss"
 import Login from "./components/Login"
 import Base from "./components/Base"
 import LandPage from "./components/LandPage"
-import Habit from "./components/Habit"
 
 function App() {
   const [user, setUser] = useState(null)
@@ -20,7 +19,6 @@ function App() {
     fetch("/auth/user")
       .then(res => res.json())
       .then(usr => {
-        console.log(usr);
         setUser(usr);
         setLoading(false);
       })
@@ -35,11 +33,6 @@ function App() {
         </Route>
         <Route path="/login">
           {user ? <Redirect to="/platform" /> : <Login />}
-        </Route>
-        <Route path="/habits">
-          <Habit
-            title="ToMeditate"
-            userEmail="jm.contreras10@uniandes.edu.co" />
         </Route>
         <Route path="/">
           <LandPage />

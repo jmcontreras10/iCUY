@@ -1,3 +1,4 @@
+// Propondría dejar una única carpeta components, no dos con un nombre similar, pues puede resultar confuso para los desarrolladores que vean el proyecto.
 import React, { useState, useEffect, useRef } from 'react';
 import {
     Switch,
@@ -55,7 +56,8 @@ const DiaryCard = (props) => {
         count += data.length == 0 ? 0 : 1;
         data.map(ele => {
             if (copy[ele.title] == undefined) {
-                let value;
+                // Siento que es mejor práctica inicializar value en '' y quitar el default del switch. Juan Pablo Correa.
+                let value='';
                 switch (ele.inputType) {
                     case 'number':
                         value = 0;
@@ -66,9 +68,6 @@ const DiaryCard = (props) => {
 
                     case 'checkbox':
                         value = false;
-                        break;
-                    default:
-                        value = ''
                         break;
                 }
                 copy[ele.title] = value;

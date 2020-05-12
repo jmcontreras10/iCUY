@@ -12,6 +12,7 @@ function LandPage() {
                     <img className="centrado-v" alt="Logo iCUY" src={logo}></img>
                 </a>
                 <Link to="/login">
+        
                     <button className="btn btn-outline btn-primary main-btn centrado-v" href="/login">
                         Ingresa
                 </button>
@@ -30,6 +31,7 @@ function LandPage() {
                             <h3>Haz de la felicidad tu habito</h3>
                         </div>
                         <Link to="/login">
+        /* Este botón me sale en mi pantalla encima del texto de arriba. Y en modo movil se repite. Deberían arreglar ese bug */
                             <button className="btn btn-primary centrado-h inicio" href="/login">
                                 Empieza Ya
                             </button>

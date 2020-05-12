@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from "prop-types";
 import DiaryCard from "./DiaryCard"
 import Habit from './Habit'
@@ -6,11 +6,11 @@ import Habit from './Habit'
 function Home(props) {
 
     const [habit, setHabit] = useState({
-        title: "ToMeditate",
+        title: "ToJog",
         description: "Meditate every day",
         isDaily: true,
         userEmail: "jm.contreras10@uniandes.edu.co",
-        inputType: "checkbox",
+        inputType: "number",
         goalValue: null
     })
 

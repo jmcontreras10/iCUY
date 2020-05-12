@@ -1,7 +1,19 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import DiaryCard from "./DiaryCard"
+import Habit from './Habit'
+
 function Home(props) {
+
+    const [habit, setHabit] = useState({
+        title: "ToMeditate",
+        description: "Meditate every day",
+        isDaily: true,
+        userEmail: "jm.contreras10@uniandes.edu.co",
+        inputType: "checkbox",
+        goalValue: null
+    })
+
     return (
         <div className="Home">
             <div className="row">
@@ -23,7 +35,7 @@ function Home(props) {
                     </div>
                 </div>
                 <div className="col-md-6 col-12">
-
+                    <Habit habit={habit} userEmail={props.user.userEmail} />
                 </div>
             </div>
         </div>

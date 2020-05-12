@@ -11,6 +11,7 @@ class Habit {
          * Required
          */
     this.title = habit.title;
+    
 
     /**
          * Description of that habit, in case the user forget it

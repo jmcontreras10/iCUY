@@ -7,8 +7,9 @@ import {
 } from "react-router-dom";
 import PropTypes from "prop-types";
 import Home from "./Home";
-import Profile from "./Profile";
-// import Profile from "./Profile";
+//import Profile from "./Profile";
+// Veo que tienen un componente perfil pero no lo están usando. En la página me redirige de nuevo al inicio. Quizá deberían importarlo asi
+import Profile from "../Components/Profile";
 import logo from "../assets/icuymaslogo.png";
 import defaultPhoto from "../assets/user.png"
 function Base(props) {

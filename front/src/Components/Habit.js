@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import GraphBoolean from './GraphBoolean'
 import GraphNumber from './GraphNumber'
 import GraphHour from './GraphHour'
+import CuyGraph from './CuyGraph'
 
 const Habit = (props) => {
 
@@ -60,6 +61,7 @@ const Habit = (props) => {
             <div className="w-100 p-3 h-25 flex" style={{ background: '#62bbc5' }}>
                 {props.habit ? <h1 style={{ color: '#F2F2F2' }}>{props.habit.title}</h1> : ""}
             </div>
+            <CuyGraph value={0.9} />
             <div className="w-100 p-3 h-75 overflow-auto" style={{ maxWidth: '100%' }}>
                 {records ? renderSwitch() : ""}
             </div>

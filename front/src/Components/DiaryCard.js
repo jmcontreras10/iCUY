@@ -198,7 +198,7 @@ const DiaryCard = (props) => {
                                                             {ele.title}
                                                         </span>
                                                         <div className="input centrado-v">
-                                                            <input value={inputs[ele.title]} onBlur={() => { saveHabit(ele.title); addToast('Registro Guardado', { appearance: 'success' }) }} onChange={e => {console.log(e.target);setInput(e.target.value, ele.title)}} className="centrado-h" type={ele.inputType}></input>
+                                                            <input defaultChecked={inputs[ele.title]} value={inputs[ele.title]} onBlur={() => { saveHabit(ele.title); addToast('Registro Guardado', { appearance: 'success' }) }} onChange={e =>setInput(e.target, ele.title)} className="centrado-h" type={ele.inputType}></input>
                                                         </div>
                                                     </div>
                                                 )
@@ -214,7 +214,7 @@ const DiaryCard = (props) => {
                                                             {ele.title}
                                                         </span>
                                                         <div className="input centrado-v">
-                                                            <input value={inputs[ele.title]} onBlur={() => { saveHabit(ele.title); addToast('Registro Guardado', { appearance: 'success' }) }} onChange={e => { console.log(e.target); setInput(e.target.value, ele.title) }} className="centrado-h" type={ele.inputType}></input>
+                                                            <input defaultChecked={inputs[ele.title]} value={inputs[ele.title]} onBlur={() => { saveHabit(ele.title); addToast('Registro Guardado', { appearance: 'success' }) }} onChange={e => setInput(e.target, ele.title) } className="centrado-h" type={ele.inputType}></input>
                                                         </div>
                                                     </div>
                                                 )
@@ -232,7 +232,7 @@ const DiaryCard = (props) => {
                                                             {ele.title}
                                                         </span>
                                                         <div className="input centrado-v">
-                                                            <input defaultChecked={ inputs[ele.title]} value={inputs[ele.title]} onBlur={() => { saveHabit(ele.title); addToast('Registro Guardado', { appearance: 'success' }) }} onChange={e => { console.log(e.target); setInput(e.target.value, ele.title) }} className="centrado-h" type={ele.inputType}></input>
+                                                            <input defaultChecked={ inputs[ele.title]} value={inputs[ele.title]} onBlur={() => { saveHabit(ele.title); addToast('Registro Guardado', { appearance: 'success' }) }} onChange={e => setInput(e.target, ele.title) } className="centrado-h" type={ele.inputType}></input>
                                                         </div>
                                                     </div>
                                                 )

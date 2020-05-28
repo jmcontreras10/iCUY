@@ -62,10 +62,9 @@ const GraphBoolean = (props) => {
                 year: year,
                 months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'].map(
                     month =>{
-                        const datesA 
                         return {
                             month: month,
-                            vals:
+                            vals:""
                         }
                     }
                 )
@@ -86,7 +85,7 @@ const GraphBoolean = (props) => {
         series: [
             {
                 name: "Done",
-                data: records
+                // data: records
             }
         ]
     };

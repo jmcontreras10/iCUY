@@ -9,7 +9,6 @@ const Habit = (props) => {
     const [records, setRecords] = useState(null)
 
     useEffect(() => {
-        console.log(props.habit)
         if(props.habit)
             fetchRecords()
     }, [props.habit])

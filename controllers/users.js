@@ -99,8 +99,22 @@ exports.getFilter = (req, res) => {
     });
 };
 
-
 const validateEmail = (email) => {
+  const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
+  let message;
+
+  if (!email)
+    message = "Email is required";
+
+  if (!re.test(email))
+    message = "Email not valid";
+
+  return message;
+};
+
+
+
+exports.validateEmailExp = (email) => {
   const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
   let message;
 

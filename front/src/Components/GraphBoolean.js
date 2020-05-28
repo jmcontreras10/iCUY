@@ -40,56 +40,39 @@ const GraphBoolean = (props) => {
         return 0;
     });
 
-    const dateArr = getDateArray(data[0].date, data[data.length - 1].date);
-    console.log(dateArr)
-
     //  Creating an array of dates
 
+    const dateArr = getDateArray(data[0].date, data[data.length - 1].date);
 
-    /*
-        Date.prototype.addDays = (days) => {
-            const dat = new Date()
-            dat.setDate(dat.getDate() + days);
-            return dat;
-        }
-    
-        const getDates = (startDate, stopDate) => {
-            let dateArray = new Array();
-            let currentDate = startDate;
-            while (currentDate <= stopDate) {
-                dateArray.push(currentDate)
-                currentDate = currentDate.addDays(1);
-            }
-            return dateArray;
-        }
-    
-        let dateArray = getDates(minDate, maxDate);
-    
-        //  Adding all dates
-    
-        const isInArray = (array, value) => {
-            return (array.find(item => { return item == value }) || []).length > 0;
-        }
-    
-        const formatDate = (date) => {
-            const d = date,
-                month = '' + (d.getMonth() + 1),
-                day = '' + d.getDate(),
-                year = d.getFullYear();
-    
-            if (month.length < 2)
-                month = '0' + month;
-            if (day.length < 2)
-                day = '0' + day;
-    
-            return [year, month, day].join('-');
-        }
-    */
-    const records = data.map(
-        date => {
-            //return isInArray(dates, date) ? { x: formatDate(date), y: 29 } : { x: formatDate(date), y: 11 }
+    dateArr.map(
+        date =>{
+            
         }
     )
+
+    const years = []
+
+    for (let index = data[0].date.getFullYear(); index <= data[data.length - 1].date.getFullYear(); index++) {
+        years.push(index)
+    }
+
+    years.map(
+        year =>{
+            return {
+                year: year,
+                months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'].map(
+                    month =>{
+                        const datesA 
+                        return {
+                            month: month,
+                            vals:
+                        }
+                    }
+                )
+            }
+        }
+    )
+
 
     const info = {
         options: {
@@ -97,7 +80,7 @@ const GraphBoolean = (props) => {
                 id: "basic-bar"
             },
             xaxis: {
-                categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
+                categories: years
             }
         },
         series: [

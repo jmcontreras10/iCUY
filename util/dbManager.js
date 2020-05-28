@@ -22,6 +22,14 @@ const getDb = () => {
   return client.db(envDb);
 };
 
+const listenChanges=(notify)=>{
+  const cursor=client.db(envDb).watch();
+  cursor.on("change",data=>{
+    console.log("changes ",data.ns.coll);
+    notify(data);
+  });
+};
+
 //  Close conection
 const closeDb = () => {
   client.close();
@@ -29,4 +37,5 @@ const closeDb = () => {
 
 exports.mongoConnect = mongoConnect;
 exports.getDb = getDb;
+exports.listenChanges=listenChanges;
 exports.closeDb = closeDb;

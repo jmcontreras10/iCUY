@@ -16,6 +16,9 @@ function Base(props) {
     const [loading, setLoading] = useState(true);
     const [habits, setHabits] = useState([]);
     useEffect(() => {
+        props.socket.addEventListener("message",(msg) => {
+            console.log("message2 ", msg)
+        });
         console.log(props.user)
         fetch(`/habits/filter?userEmail=${props.user.email}`)
             .then(res => res.json())
@@ -23,7 +26,7 @@ function Base(props) {
                 setHabits(hab);
                 setLoading(false);
             })
-    }, [props.user]);
+    }, [props.user, props.socket]);
     return (
         <>
             {props.user.nuevo ? '' :
@@ -73,6 +76,7 @@ function Base(props) {
     );
 }
 Base.propTypes = {
-    user: PropTypes.object.isRequired
+    user: PropTypes.object.isRequired,
+    socket: PropTypes.isRequired
 }
 export default Base;

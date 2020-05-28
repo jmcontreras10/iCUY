@@ -7,7 +7,9 @@
 const app = require("../app");
 const debug = require("debug")("icuy:server");
 const http = require("http");
+const wsu = require("../util/WSUtils");
 const dbManager = require("../util/dbManager").mongoConnect;
+const changes = require("../util/dbManager").listenChanges;
 const closeConnection = require("../util/dbManager").closeDb;
 
 /**
@@ -85,10 +87,15 @@ function onError(error) {
  */
 
 function onListening() {
+  console.log("start listening")
   var addr = server.address();
   var bind = typeof addr === "string"
     ? "pipe " + addr
     : "port " + addr.port;
   debug("Listening on " + bind);
-  dbManager();
+  dbManager().then(() => {
+    wsu.setupWS(server);
+    changes(wsu.notify);
+  });
+  
 }

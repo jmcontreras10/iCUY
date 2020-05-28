@@ -20,7 +20,8 @@ function Home(props) {
                     </div>
                 </div>
                 <div className="col-md-6 col-12">
-                    <CuyGraph value={0.9} />
+                    <CuyGraph completed={10} total={30} />
+
                 </div>
             </div>
         </div>

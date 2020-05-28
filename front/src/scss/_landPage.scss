@@ -1,4 +1,6 @@
 .LandPage {
+    overflow-y: scroll;
+    height: 100%;
     nav {
         z-index: 10;
         background-color: white;
@@ -23,6 +25,7 @@
         background: #4192a2;
         height: 100vh;
         padding: 30px 5% 30px 20%;
+        position: relative;
         .cover {
             height: 30%;
             width: 100%;
@@ -52,10 +55,7 @@
             }
         }
         .inicio{
-            position: absolute;
-            bottom: 170px;
             height: 60px;
-            width: 120;
             font-size: 30px;
         }
     }

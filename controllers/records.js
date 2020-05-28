@@ -62,8 +62,9 @@ exports.getFilter = (req, res) => {
   const date = req.query.date;
   const habitTitle = req.query.habitTitle;
   const userEmail = req.query.userEmail;
+  const dateFrom= req.query.dateFrom;
 
-  fetchFilter(date, habitTitle, userEmail)
+  fetchFilter(date, habitTitle, userEmail,dateFrom)
     .then(habits => {
       res.status(200).json(habits);
     })

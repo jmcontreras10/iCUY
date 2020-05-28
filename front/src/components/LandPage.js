@@ -28,12 +28,12 @@ function LandPage() {
                             <h2 className="title">Transforma tu Vida</h2>
                             <p>Organiza y guia tu vida para ser la mejor version de ti mismo</p>
                             <h3>Haz de la felicidad tu habito</h3>
-                        </div>
                         <Link to="/login">
-                            <button className="btn btn-primary centrado-h inicio" href="/login">
+                            <button className="btn btn-primary inicio" href="/login">
                                 Empieza Ya
                             </button>
                         </Link>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -175,6 +175,5 @@ function Profile(props) {
 Profile.propTypes = {
     user: PropTypes.object.isRequired,
     habits: PropTypes.array.isRequired,
-    loading: PropTypes.bool.isRequired,
 }
 export default Profile;

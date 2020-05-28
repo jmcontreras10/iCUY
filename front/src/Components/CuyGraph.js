@@ -59,10 +59,6 @@ const GraphNumber = (props) => {
         .attr('width', 30)
         .attr('x', dimensions.width - 60)
         .attr('y', -10)
-
-
-
-
     return (
         <div class="progressCuy" ref={targetRef}>Mi Progress Cuy</div>
     )

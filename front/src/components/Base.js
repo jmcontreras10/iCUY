@@ -13,20 +13,6 @@ import logo from "../assets/icuymaslogo.png";
 import defaultPhoto from "../assets/user.png"
 function Base(props) {
     const [location] = useState(useLocation().pathname);
-    const [loading, setLoading] = useState(true);
-    const [habits, setHabits] = useState([]);
-    useEffect(() => {
-        props.socket.addEventListener("message",(msg) => {
-            console.log("message2 ", msg)
-        });
-        console.log(props.user)
-        fetch(`/habits/filter?userEmail=${props.user.email}`)
-            .then(res => res.json())
-            .then(hab => {
-                setHabits(hab);
-                setLoading(false);
-            })
-    }, [props.user, props.socket]);
     return (
         <>
             {props.user.nuevo ? '' :
@@ -56,18 +42,19 @@ function Base(props) {
                             </li>
                         </ul>
                     </nav>
+                    
                     <Switch>
                         {/* <Route path="/profile/:id">
                     <Profile user={props.user} solicitudes={solicitudes}/>
                 </Route> */}
                         <Route path="/platform/profile">
-                            <Profile user={props.user} habits={habits} loading={loading} />
+                            <Profile user={props.user} habits={props.habits} />
                         </Route>
                         <Route path="/platform/*">
                              <Redirect to="/platform" />
                         </Route>
                         <Route path="/platform">
-                            <Home user={props.user} habits={habits} loading={loading} />
+                            <Home user={props.user} habits={props.habits} records={props.records}/>
                         </Route>
                     </Switch>
                 </>
@@ -77,6 +64,7 @@ function Base(props) {
 }
 Base.propTypes = {
     user: PropTypes.object.isRequired,
-    socket: PropTypes.isRequired
+    habits: PropTypes.array.isRequired,
+    records: PropTypes.array.isRequired
 }
 export default Base;

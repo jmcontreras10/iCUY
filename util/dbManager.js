@@ -27,7 +27,7 @@ const getDb = () => {
 };
 
 const listenChanges=(notify)=>{
-  const cursor=client.db(envDb).watch();
+  const cursor=client.db(envDb).watch([],{fullDocument:"updateLookup"});
   cursor.on("change",data=>{
     console.log("changes ",data.ns.coll);
     notify(data);

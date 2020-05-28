@@ -1,8 +1,10 @@
+import { useToasts } from 'react-toast-notifications'
 import React, { useState, useEffect } from 'react';
 import PropTypes from "prop-types";
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
 import { MdErrorOutline } from 'react-icons/md'
 const DiaryCard = (props) => {
+    const { addToast } = useToasts()
     const [first, setFisrt] = useState([])
     const [second, setSecond] = useState([])
     const [third, setThird] = useState([])
@@ -37,11 +39,26 @@ const DiaryCard = (props) => {
             ]
         }
     ]);
+
+    const updateRecord = (inp) => {
+        let d = new Date();
+        let actualDate = `${d.getDate()}-${d.getMonth() + 1}-${d.getFullYear()}`;
+        let today = props.records.filter(ele => ele.date == actualDate);
+        let copy = inp ? inp : { ...inputs };
+        let keys = Object.keys(copy)
+        console.log(today, keys)
+        today.map((ele) => {
+            if (keys.includes(ele.habitTitle)) {
+                copy[ele.habitTitle] = ele.value;
+            }
+        })
+        setInputs(copy);
+    }
     useEffect(() => {
         let copy = {}
         let sortHabits = (a, b) => {
             if (a.inputType === b.inputType)
-            return 0
+                return 0
             return a.inputType > b.inputType ? 1 : -1
         }
         let count = 0;
@@ -125,9 +142,14 @@ const DiaryCard = (props) => {
         setThird(data);
         setAvailable(count);
         setInputs(copy);
-    }, [areas,props.area,props.habits]);
+        updateRecord(copy);
+    }, [areas, props.area, props.habits]);
+
+    useEffect(updateRecord, [props.records])
+
 
     const setInput = (value, title) => {
+        console.log(value)
         let copy = { ...inputs };
         copy[title] = value;
         setInputs(copy);
@@ -135,11 +157,12 @@ const DiaryCard = (props) => {
     const saveHabit = (title) => {
         let d = new Date();
         let send = {
-            date: `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`,
+            date: `${d.getDate()}-${d.getMonth() + 1}-${d.getFullYear()}`,
             userEmail: props.user.email,
             habitTitle: title,
             value: inputs[title]
         }
+        console.log(inputs);
         fetch('/records', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -175,7 +198,7 @@ const DiaryCard = (props) => {
                                                             {ele.title}
                                                         </span>
                                                         <div className="input centrado-v">
-                                                            <input value={inputs[ele.title]} onBlur={() => saveHabit(ele.title)} onChange={e => setInput(e.target.value, ele.title)} className="centrado-h" type={ele.inputType}></input>
+                                                            <input value={inputs[ele.title]} onBlur={() => { saveHabit(ele.title); addToast('Registro Guardado', { appearance: 'success' }) }} onChange={e => {console.log(e.target);setInput(e.target.value, ele.title)}} className="centrado-h" type={ele.inputType}></input>
                                                         </div>
                                                     </div>
                                                 )
@@ -191,7 +214,7 @@ const DiaryCard = (props) => {
                                                             {ele.title}
                                                         </span>
                                                         <div className="input centrado-v">
-                                                            <input value={inputs[ele.title]} onBlur={() => saveHabit(ele.title)} onChange={e => setInput(e.target.value, ele.title)} className="centrado-h" type={ele.inputType}></input>
+                                                            <input value={inputs[ele.title]} onBlur={() => { saveHabit(ele.title); addToast('Registro Guardado', { appearance: 'success' }) }} onChange={e => { console.log(e.target); setInput(e.target.value, ele.title) }} className="centrado-h" type={ele.inputType}></input>
                                                         </div>
                                                     </div>
                                                 )
@@ -209,7 +232,7 @@ const DiaryCard = (props) => {
                                                             {ele.title}
                                                         </span>
                                                         <div className="input centrado-v">
-                                                            <input value={inputs[ele.title]} onBlur={() => saveHabit(ele.title)} onChange={e => setInput(e.target.value, ele.title)} className="centrado-h" type={ele.inputType}></input>
+                                                            <input defaultChecked={ inputs[ele.title]} value={inputs[ele.title]} onBlur={() => { saveHabit(ele.title); addToast('Registro Guardado', { appearance: 'success' }) }} onChange={e => { console.log(e.target); setInput(e.target.value, ele.title) }} className="centrado-h" type={ele.inputType}></input>
                                                         </div>
                                                     </div>
                                                 )
@@ -245,7 +268,7 @@ const DiaryCard = (props) => {
                             first.length === 0 && second.length === 0 && third.length === 0 ?
                                 <div className="col empty">
                                     <div className="empty-icon centrado-h fit">
-                                        <MdErrorOutline/>
+                                        <MdErrorOutline />
                                     </div>
                                     <h3 className="empty-text">Parece que no has creado ningun habito en esta categoria, crea uno nuevo en tu perfil. </h3>
                                 </div>
@@ -265,6 +288,7 @@ const DiaryCard = (props) => {
 DiaryCard.propTypes = {
     area: PropTypes.number.isRequired,
     user: PropTypes.object.isRequired,
-    habits: PropTypes.array.isRequired
+    habits: PropTypes.array.isRequired,
+    records: PropTypes.array.isRequired
 }
 export default DiaryCard;

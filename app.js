@@ -5,10 +5,6 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 var bodyParser = require("body-parser");
 
-// Dev env
-const dotenv = require("dotenv");
-dotenv.config();
-
 const configurePassport = require("./configurePassport.js");
 const passportRouter = require("./routes/passport");
 

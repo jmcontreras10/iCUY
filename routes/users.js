@@ -10,7 +10,7 @@ const update = require("../controllers/users").update;
 /** Save (CREATE and UPDATE user) */
 router.post("/", (req,res)=>{
   post(req.body).then(() => {
-    res.redirect("/platform");
+    res.status(200).redirect("/platform");
   })
     .catch(err => {
       res.status(409).json(err);

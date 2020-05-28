@@ -2,6 +2,11 @@
 
 const MongoClient = require("mongodb").MongoClient;
 
+// Dev env
+const dotenv = require("dotenv");
+
+dotenv.config();
+
 const envDb = process.env.MONGO_DB_NAME;
 const envUser = process.env.MONGO_DB_USER;
 const envPass = process.env.MONGO_DB_PASSWORD;
@@ -14,7 +19,6 @@ const mongoConnect = async () => {
   const url = `mongodb+srv://${envUser}:${envPass}@${envUrl}?retryWrites=true&w=majority`;
   client = new MongoClient(url, { useNewUrlParser: true , useUnifiedTopology: true });
   await client.connect();
-
 };
 
 //  Database getting

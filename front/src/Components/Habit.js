@@ -4,7 +4,7 @@ import GraphNumber from './GraphNumber'
 import GraphHour from './GraphHour'
 
 const Habit = (props) => {
-
+    // code review antoine noreau: We need to refresh page to see updated habits.
     const [records, setRecords] = useState(null)
 
     useEffect(() => {

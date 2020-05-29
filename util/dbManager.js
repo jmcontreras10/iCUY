@@ -3,9 +3,9 @@
 const MongoClient = require("mongodb").MongoClient;
 
 // Dev env
-//const dotenv = require("dotenv");
+const dotenv = require("dotenv");
 
-//dotenv.config();
+dotenv.config();
 
 const envDb = process.env.MONGO_DB_NAME;
 const envUser = process.env.MONGO_DB_USER;

@@ -16,6 +16,8 @@ import {
     GiThreeFriends,
     GiBeamsAura
 } from 'react-icons/gi'
+import GraphNumber from './GraphNumber';
+import GraphHour from './GraphHour';
 import { icons } from 'react-icons/lib/cjs';
 import { set } from 'd3';
 
@@ -172,113 +174,114 @@ const Habit = (props) => {
                 <div className="col-md-5 col-12 info">
                     {
                         inputs ?
-                        <>
-                            <div className="row details">
-                                <div className="card">
-                                    <div className="card-header">
-                                        <h3 className="m-0">{newHabit ? "Nuevo Habito" : "Detalles"}</h3>
-                                    </div>
-                                    <div className="card-body">
-                                        <form onSubmit={(e) => e.preventDefault()} className="edit">
-                                            <div className="row">
-                                                <div className="col-6 ">
-                                                    <div className="inputBox">
-                                                        <input type="text" name="title" required value={inputs.title} onChange={e => setInput(e.target.value, 'title')}></input>
-                                                        <label>Nombre Corto</label>
+                            <>
+                                <div className="row details">
+                                    <div className="card">
+                                        <div className="card-header">
+                                            <h3 className="m-0">{newHabit ? "Nuevo Habito" : "Detalles"}</h3>
+                                        </div>
+                                        <div className="card-body">
+                                            <form onSubmit={(e) => e.preventDefault()} className="edit">
+                                                <div className="row">
+                                                    <div className="col-6 ">
+                                                        <div className="inputBox">
+                                                            <input type="text" name="title" required value={inputs.title} onChange={e => setInput(e.target.value, 'title')}></input>
+                                                            <label>Nombre Corto</label>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div className="col-6 ">
-                                                    <div className="checkbox">
-                                                        <label>Registro Diario</label>
-                                                        <input className="centrado-h" type="checkbox" name="isDaily" checked={inputs.isDaily} onChange={e => setInput(!inputs.isDaily, 'isDaily')}></input>
+                                                    <div className="col-6 ">
+                                                        <div className="checkbox">
+                                                            <label>Registro Diario</label>
+                                                            <input className="centrado-h" type="checkbox" name="isDaily" checked={inputs.isDaily} onChange={e => setInput(!inputs.isDaily, 'isDaily')}></input>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div className="col-12 ">
-                                                    <div className="inputBox">
-                                                        <input type="text" name="description" required value={inputs.description} onChange={e => setInput(e.target.value, 'description')} ></input>
-                                                        <label>Descripcion Habito</label>
+                                                    <div className="col-12 ">
+                                                        <div className="inputBox">
+                                                            <input type="text" name="description" required value={inputs.description} onChange={e => setInput(e.target.value, 'description')} ></input>
+                                                            <label>Descripcion Habito</label>
+                                                        </div>
                                                     </div>
-                                                </div>
 
-                                                <div className="col-4 ">
-                                                    <div className="inputBox">
-                                                        <label className="no-animate">Tipo de Registro</label>
-                                                        <select name="inputType" required value={inputs.inputType} onChange={e => { setInput('', 'goalValue'); setInput(e.target.value, 'inputType') }}>
-                                                            <option value="number">Numerico</option>
-                                                            <option value="checkbox">Si/No(completado)</option>
-                                                            <option value="time">Hora</option>
-                                                        </select>
+                                                    <div className="col-4 ">
+                                                        <div className="inputBox">
+                                                            <label className="no-animate">Tipo de Registro</label>
+                                                            <select name="inputType" required value={inputs.inputType} onChange={e => { setInput('', 'goalValue'); setInput(e.target.value, 'inputType') }}>
+                                                                <option value="number">Numerico</option>
+                                                                <option value="checkbox">Si/No(completado)</option>
+                                                                <option value="time">Hora</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                {
-                                                    inputs.inputType !== "checkbox" ?
-                                                        <div className="col-4 ">
-                                                            <div className="inputBox">
-                                                                <input type={inputs.inputType} name="goalValue" required value={inputs.goalValue} onChange={e => setInput(inputs.inputType === 'number' ? parseInt(e.target.value) : e.target.value, 'goalValue')}></input>
-                                                                <label className={inputs.inputType === "time" ? "no-animate" : ""}>Objetivo</label>
+                                                    {
+                                                        inputs.inputType !== "checkbox" ?
+                                                            <div className="col-4 ">
+                                                                <div className="inputBox">
+                                                                    <input type={inputs.inputType} name="goalValue" required value={inputs.goalValue} onChange={e => setInput(inputs.inputType === 'number' ? parseInt(e.target.value) : e.target.value, 'goalValue')}></input>
+                                                                    <label className={inputs.inputType === "time" ? "no-animate" : ""}>Objetivo</label>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        : ''
-                                                }
-                                                {
-                                                    inputs.inputType === "number" ?
-                                                        <div className="col-4 ">
-                                                            <div className="inputBox">
-                                                                <input type="text" name="unit" required value={inputs.unit} onChange={e => setInput(e.target.value, 'unit')}></input>
-                                                                <label>Unidad(ej.vasos)</label>
+                                                            : ''
+                                                    }
+                                                    {
+                                                        inputs.inputType === "number" ?
+                                                            <div className="col-4 ">
+                                                                <div className="inputBox">
+                                                                    <input type="text" name="unit" required value={inputs.unit} onChange={e => setInput(e.target.value, 'unit')}></input>
+                                                                    <label>Unidad(ej.vasos)</label>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        : ''
-                                                }
-                                                <div className="col-12 mb-3">
-                                                    <h4>Selecciona un area</h4>
-                                                    <div className="select-area row">
-                                                        {
-                                                            areas.map(area => {
-                                                                return (
-                                                                    <div className={"col area-container " + area.color} key={"area-" + area.title}>
-                                                                        <label className="area-title centrado-h">{area.title}</label>
-                                                                        <div className="circle centrado-h">
-                                                                            {
-                                                                                area.subareas.map((subarea, i) => {
-                                                                                    return (
-                                                                                        <div className={`sub-area ${inputs.subarea === area.codigos[i] ? 'active' : ''}`} key={'subarea-' + subarea} onClick={() => setInput(area.codigos[i], 'subarea')}>
-                                                                                            <span>{subarea}</span>
-                                                                                            <div className="icon fit">
-                                                                                                {icons[area.codigos[i] - 1]}
+                                                            : ''
+                                                    }
+                                                    <div className="col-12 mb-3">
+                                                        <h4>Selecciona un area</h4>
+                                                        <div className="select-area row">
+                                                            {
+                                                                areas.map(area => {
+                                                                    return (
+                                                                        <div className={"col area-container " + area.color} key={"area-" + area.title}>
+                                                                            <label className="area-title centrado-h">{area.title}</label>
+                                                                            <div className="circle centrado-h">
+                                                                                {
+                                                                                    area.subareas.map((subarea, i) => {
+                                                                                        return (
+                                                                                            <div className={`sub-area ${inputs.subarea === area.codigos[i] ? 'active' : ''}`} key={'subarea-' + subarea} onClick={() => setInput(area.codigos[i], 'subarea')}>
+                                                                                                <span>{subarea}</span>
+                                                                                                <div className="icon fit">
+                                                                                                    {icons[area.codigos[i] - 1]}
+                                                                                                </div>
                                                                                             </div>
-                                                                                        </div>
-                                                                                    );
-                                                                                })
-                                                                            }
+                                                                                        );
+                                                                                    })
+                                                                                }
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                );
-                                                            })
+                                                                    );
+                                                                })
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-12">
+                                                        <button className="btn btn-primary mx-2 float-right" onClick={saveHabit}>
+                                                            Guardar
+                                                    </button>
+                                                        {
+                                                            newHabit &&
+                                                            <button className="btn btn-medium mx-2 float-right" onClick={() => { setInputs(null); setNewHabit(false); }}>
+                                                                Cancelar
+                                                        </button>
                                                         }
                                                     </div>
                                                 </div>
-                                                <div className="col-12">
-                                                    <button className="btn btn-primary mx-2 float-right" onClick={saveHabit}>
-                                                        Guardar
-                                                    </button>
-                                                    {
-                                                        newHabit &&
-                                                        <button className="btn btn-medium mx-2 float-right" onClick={() => {setInputs(null); setNewHabit(false); }}>
-                                                            Cancelar
-                                                        </button>
-                                                    }
-                                                </div>
-                                            </div>
-                                        </form>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
+                                <div className="row graph">
+                                    {inputs.inputType == 'number' ? <GraphNumber data={props.records} habit={inputs.title}/>:
+                                     inputs.inputType=='time'?<GraphHour data={props.records} habit={inputs.title}/>:""}
                             </div>
-                            <div className="row graph">
-                                                    
-                            </div>
-                        </>
-                          :
+                            </>
+                            :
                             <h3>Selecciona algun habito para ver la informacion</h3>
                     }
 

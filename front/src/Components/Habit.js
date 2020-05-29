@@ -242,8 +242,9 @@ const Habit = (props) => {
                                                                             {
                                                                                 area.subareas.map((subarea, i) => {
                                                                                     return (
+                                                                                        //Hay un error en sub-area :hover al momento de crear un nuevo hábito ya que si se ha seleccionado un habito en el hoover se sobreescibe el nombre
                                                                                         <div className={`sub-area ${inputs.subarea === area.codigos[i] ? 'active' : ''}`} key={'subarea-' + subarea} onClick={() => setInput(area.codigos[i], 'subarea')}>
-                                                                                            <span>{subarea}</span>
+                                                                                            <span className={`${cond} ? 'white' : ''}`}>{subarea}</span>
                                                                                             <div className="icon fit">
                                                                                                 {icons[area.codigos[i] - 1]}
                                                                                             </div>

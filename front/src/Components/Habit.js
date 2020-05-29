@@ -18,8 +18,10 @@ import {
 } from 'react-icons/gi'
 import { icons } from 'react-icons/lib/cjs';
 import { set } from 'd3';
+import { useToasts } from 'react-toast-notifications'
 
 const Habit = (props) => {
+    const { addToast } = useToasts()
     const icons = [
         <GiMeditation />,
         <GiWeightLiftingUp />,
@@ -89,8 +91,10 @@ const Habit = (props) => {
             body: JSON.stringify(inputs)
         }).then(() => {
             if (newHabit) {
-                setInput(null)
+                setInput(null);
                 setNewHabit(false);
+                //pueden agregar un mensaje para saber que ya se agrego el nuevo habito para mejorar la experiencia de usuario un pop up modal alert
+                addToast('Registro Guardado', { appearance: 'success' })
             }
         });
     }

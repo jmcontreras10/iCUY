@@ -15,10 +15,13 @@ const CuyGraph = (props) => {
                 width: targetRef.current.offsetWidth,
                 height: 50
             });
+            console.log(props.completed, props.total)
+            if (props.completed !== undefined && props.total !== undefined){
             const a = props.completed / props.total;
             setCurrentState(a.toFixed(2));
+            }
         }
-    }, []);
+    }, [props.completed, props.total]);
 
     d3.select(".progressCuy").html("");
     d3.select(".progressNumber").html("");
@@ -88,15 +91,10 @@ const CuyGraph = (props) => {
         .text(props.completed + "/" + props.total);
 
     return (
-        <div>
-            <h1 style={{color:'#0e4b6e'}}>Tu progreso el día de hoy</h1>
-            <h2 style={{margin: '40px 0 20px 0',color:'#FFF',background:'#0e4b6e',padding:'5px'}}>Cumplimiento porcentual de tus hábitos</h2>
-            <div class="progressCuy" ref={targetRef}>Prrogress</div>
-            <h3><strong>{currentState*100}%</strong></h3>
-            <h2 style={{margin: '40px 0 0 0',color:'#FFF',background:'#0e4b6e',padding:'5px'}}>Cumplimiento de tus hábitos</h2>
-            <div class="progressNumber"  style={{margin: '20px 0 0 0'}}></div>
-            <p style={{margin: '20px 0 0 0', fontSize:'18px'}}>Has completado <strong>{props.completed}</strong> hábitos de tus <strong>{props.total}</strong> hábitos registrados el día de hoy.</p>
-        </div>
+        <>
+            <div class="progressCuy" ref={targetRef}>Progress</div>
+            <h5><strong>Progreso:{currentState * 100}%</strong></h5>
+        </>
     )
 
 }

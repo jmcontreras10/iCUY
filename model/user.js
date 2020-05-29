@@ -150,7 +150,24 @@ const fetchFilter = (email, name) => {
     });
 };
 
+const agregate = () => {
+  const db = getDb();
+  return db
+    .collection("users")
+    .aggregate([
+      {
+        "$match": {}
+      }, {
+        "$set": {
+          "pupils": [],
+          "supervisors": []
+        }
+      }
+    ]);
+};
+
 exports.User = User;
-exports.update=update;
+exports.update = update;
+exports.agregate = agregate;
 exports.fetchAll = fetchAll;
 exports.fetchFilter = fetchFilter;

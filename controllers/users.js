@@ -2,6 +2,7 @@
 
 const User = require("../model/user").User;
 const update = require("../model/user").update;
+const aggregate = require("../model/user").agregate;
 const fetchAll = require("../model/user").fetchAll;
 const fetchFilter = require("../model/user").fetchFilter;
 const crypto = require("crypto");
@@ -97,6 +98,11 @@ exports.getFilter = (req, res) => {
     .catch(err => {
       throw (err);
     });
+};
+
+exports.aggregate=(req,res)=>{
+  aggregate();
+  res.status(200).json("done");
 };
 
 const validateEmail = (email) => {

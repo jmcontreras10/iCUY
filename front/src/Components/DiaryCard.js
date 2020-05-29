@@ -148,10 +148,22 @@ const DiaryCard = (props) => {
     useEffect(updateRecord, [props.records])
 
 
-    const setInput = (value, title) => {
-        console.log(value)
+    const setInput = (input, title) => {
         let copy = { ...inputs };
-        copy[title] = value;
+        switch (input.type) {
+            case "number":
+                copy[title] = parseInt(input.value)
+                break;
+            case "checkbox":
+                copy[title] = !copy[title]
+                break;
+
+            default:
+                copy[title] = input.value
+                break;
+        }
+        console.log('set input', input, copy)
+
         setInputs(copy);
     }
     const saveHabit = (title) => {
@@ -198,7 +210,7 @@ const DiaryCard = (props) => {
                                                             {ele.title}
                                                         </span>
                                                         <div className="input centrado-v">
-                                                            <input defaultChecked={inputs[ele.title]} value={inputs[ele.title]} onBlur={() => { saveHabit(ele.title); addToast('Registro Guardado', { appearance: 'success' }) }} onChange={e =>setInput(e.target, ele.title)} className="centrado-h" type={ele.inputType}></input>
+                                                            <input defaultChecked={inputs[ele.title]} value={inputs[ele.title]} onBlur={() => { saveHabit(ele.title); addToast('Registro Guardado', { appearance: 'success' }) }} onChange={e => setInput(e.target, ele.title)} className="centrado-h" type={ele.inputType}></input>
                                                         </div>
                                                     </div>
                                                 )
@@ -214,7 +226,7 @@ const DiaryCard = (props) => {
                                                             {ele.title}
                                                         </span>
                                                         <div className="input centrado-v">
-                                                            <input defaultChecked={inputs[ele.title]} value={inputs[ele.title]} onBlur={() => { saveHabit(ele.title); addToast('Registro Guardado', { appearance: 'success' }) }} onChange={e => setInput(e.target, ele.title) } className="centrado-h" type={ele.inputType}></input>
+                                                            <input defaultChecked={inputs[ele.title]} value={inputs[ele.title]} onBlur={() => { saveHabit(ele.title); addToast('Registro Guardado', { appearance: 'success' }) }} onChange={e => setInput(e.target, ele.title)} className="centrado-h" type={ele.inputType}></input>
                                                         </div>
                                                     </div>
                                                 )
@@ -232,7 +244,7 @@ const DiaryCard = (props) => {
                                                             {ele.title}
                                                         </span>
                                                         <div className="input centrado-v">
-                                                            <input defaultChecked={ inputs[ele.title]} value={inputs[ele.title]} onBlur={() => { saveHabit(ele.title); addToast('Registro Guardado', { appearance: 'success' }) }} onChange={e => setInput(e.target, ele.title) } className="centrado-h" type={ele.inputType}></input>
+                                                            <input defaultChecked={inputs[ele.title]} value={inputs[ele.title]} onBlur={() => { saveHabit(ele.title); addToast('Registro Guardado', { appearance: 'success' }) }} onChange={e => setInput(e.target, ele.title)} className="centrado-h" type={ele.inputType}></input>
                                                         </div>
                                                     </div>
                                                 )

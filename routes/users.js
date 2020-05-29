@@ -5,6 +5,7 @@ const post = require("../controllers/users").create;
 const get = require("../controllers/users").getAll;
 const getF = require("../controllers/users").getFilter;
 const update = require("../controllers/users").update;
+const aggregate = require("../controllers/users").aggregate;
 
 
 /** Save (CREATE and UPDATE user) */
@@ -25,5 +26,7 @@ router.get("/filter", getF);
 
 /** Update the user info that have the UUID */
 router.post("/update", update);
+
+router.post("/aggregate", aggregate);
 
 module.exports = router;

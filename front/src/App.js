@@ -45,7 +45,7 @@ function App() {
           if(usr.pupils){
             let pups={};
             let promises=[];
-            user.pupils.map((pup)=>{
+            usr.pupils.map((pup)=>{
               promises.push(fetch(`/habits/filter?userEmail=${pup.email}`)
                 .then(res => res.json())
                 .then(hab => {

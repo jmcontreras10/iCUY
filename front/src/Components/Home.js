@@ -12,8 +12,9 @@ function Home(props) {
         let d = new Date();
         let actualDate = `${d.getDate()}-${d.getMonth() + 1}-${d.getFullYear()}`;
         let today = props.records.filter(ele => ele.date == actualDate);
-        setTodayH(today.lenght);
-    },[])
+        console.log(today)
+        setTodayH(today.length);
+    },[props.records])
 
 
     return (
@@ -28,8 +29,12 @@ function Home(props) {
                     </div>
                 </div>
                 <div className="col-md-6 col-12">
-                    <CuyGraph completed={3} total={5} />
-
+                    <div>
+                        <h1 style={{ color: '#0e4b6e' }}>Tu progreso el día de hoy</h1>
+                        <h2 style={{ margin: '40px 0 20px 0', color: '#FFF', background: '#0e4b6e', padding: '5px' }}>Cumplimiento porcentual de tus hábitos</h2>
+                        <CuyGraph completed={todayH} total={props.habits.length} />
+                        <p style={{ margin: '20px 0 0 0', fontSize: '18px' }}>Has completado <strong>{todayH}</strong> hábitos de tus <strong>{props.habits.length}</strong> hábitos registrados el día de hoy.</p>
+                    </div>
                 </div>
             </div>
         </div>

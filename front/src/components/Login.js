@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 function Login() {
+    //Es raro que tengan 2 carpetas de components
     const [registered, setRegistered] = useState(true);
     if (registered) {
         return (

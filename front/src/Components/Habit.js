@@ -172,6 +172,7 @@ const Habit = (props) => {
                 <div className="col-md-5 col-12 info">
                     {
                         inputs ?
+                        <>
                             <div className="row details">
                                 <div className="card">
                                     <div className="card-header">
@@ -273,7 +274,11 @@ const Habit = (props) => {
                                     </div>
                                 </div>
                             </div>
-                            :
+                            <div className="row graph">
+                                                    
+                            </div>
+                        </>
+                          :
                             <h3>Selecciona algun habito para ver la informacion</h3>
                     }
 

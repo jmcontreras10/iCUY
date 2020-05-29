@@ -1,6 +1,7 @@
 "use strict";
 
 const User = require("../model/user").User;
+const update = require("../model/user").update;
 const fetchAll = require("../model/user").fetchAll;
 const fetchFilter = require("../model/user").fetchFilter;
 const crypto = require("crypto");
@@ -60,8 +61,7 @@ exports.update = (req, res) => {
   }
 
   if (!errMessage) {
-    const user = new User(inputUser);
-    user.update()
+    update(inputUser)
       .then(() => {
         res.status(200).json({ "message": "User updated" });
       })

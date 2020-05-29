@@ -7,12 +7,12 @@ class User {
 
   constructor(user) {
     if (user) {
-
+      console.log(user._id,user);
       /**
        * The user's _id
        * Required
        */
-      this._id = user.id?new mongodb.ObjectID(user.id):undefined;
+      this._id = user._id?new mongodb.ObjectID(user._id):undefined;
 
       /**
        * The user's name
@@ -24,7 +24,7 @@ class User {
      * The user's email
      * Required, Unique
      */
-      this.email = user.email.toLowerCase();
+      this.email = user.email?user.email.toLowerCase():undefined;
 
       /**
      * The user's password
@@ -68,6 +68,10 @@ class User {
      */
       this.photo = user.photo;
 
+      this.supervisors = user.supervisors ? user.supervisors : [];
+
+      this.pupils = user.pupils ? user.pupils : [];
+
       /**
        * For the Unique value, the database actually verifies if (email) to be unique
        */
@@ -87,20 +91,23 @@ class User {
       });
   }
 
-  update() {
-    //  Getting Database
-    const db = getDb();
-    //  Returning response from habit creation
-    return db.collection("users")
-      .updateOne({ _id: this._id }, { $set: this }, { upsert: true })
-      .then()
-      .catch(err => {
-        throw err;
-      });
-  }
-
+  
 }
 
+const update=(user)=>{
+  //  Getting Database
+  let id = new mongodb.ObjectID(user._id);
+  delete user._id;
+  if(user.email)
+    user.email=user.email.toLowerCase();
+  const db = getDb();
+  return db.collection("users")
+    .updateOne({ _id: id }, { $set: user }, { upsert: true })
+    .then()
+    .catch(err => {
+      throw err;
+    });
+};
 const fetchAll = () => {
   //  Getting Database
   const db = getDb();
@@ -144,5 +151,6 @@ const fetchFilter = (email, name) => {
 };
 
 exports.User = User;
+exports.update=update;
 exports.fetchAll = fetchAll;
 exports.fetchFilter = fetchFilter;

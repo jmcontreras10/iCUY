@@ -101,6 +101,9 @@
 .btn-tertiary {
   @include btn-styles($tertiary, $tertiary-contrast, $tertiary-tint, $tertiary-shade);
 }
+.btn-quaternary {
+  @include btn-styles($quaternary, $quaternary-contrast, $quaternary-tint, $quaternary-shade);
+}
 .btn-warning {
   @include btn-styles($warning, $warning-contrast, $warning-tint, $warning-shade);
 }

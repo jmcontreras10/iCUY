@@ -8,6 +8,7 @@ import {
 import PropTypes from "prop-types";
 import Home from "./Home";
 import Profile from "./Profile";
+import Habit from "./Habit";
 // import Profile from "./Profile";
 import logo from "../assets/icuymaslogo.png";
 import defaultPhoto from "../assets/user.png"
@@ -29,6 +30,9 @@ function Base(props) {
                                 <li className="nav-item">
                                     <a className={`nav-link ${location === "/platform/profile"?'active':''}`} href="/platform/profile">Perfil</a>
                                 </li>
+                                <li className="nav-item">
+                                    <a className={`nav-link ${location === "/platform/habits" ? 'active' : ''}`} href="/platform/habits">Mis Habitos</a>
+                                </li>
                             </ul>
                         </div>
                         <ul className="navbar-nav profile centrado-v">
@@ -49,6 +53,9 @@ function Base(props) {
                 </Route> */}
                         <Route path="/platform/profile">
                             <Profile user={props.user} habits={props.habits} />
+                        </Route>
+                        <Route path="/platform/habits">
+                            <Habit user={props.user} habits={props.habits} records={props.records}/>
                         </Route>
                         <Route path="/platform/*">
                              <Redirect to="/platform" />

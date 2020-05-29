@@ -1,0 +1,299 @@
+.Habit {
+    padding: 20px 30px;
+    .contain,
+    .info {
+        height: 100%;
+    }
+    .info {
+        padding: 0 30px;
+        .card-header {
+            background-color: $secondary;
+            color: white;
+            padding: 6px 20px;
+        }
+        .checkbox {
+            label {
+                color: $tertiary;
+                font-size: 14px;
+                width: 100%;
+            }
+        }
+        .select-area {
+            overflow: hidden;
+            position: relative;
+            .area-container {
+                .area-title {
+                    margin: 0;
+                }
+                .circle {
+                    width: 115px;
+                    height: 115px;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    position: relative;
+                    color: white;
+                    .sub-area {
+                        span {
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -70%);
+                            display: none;
+                        }
+                        .icon {
+                            position: absolute;
+                            width: 30px;
+                            height: 30px;
+                            transition: 0.5s;
+                            border-radius: 50%;
+                            background-color: rgba(255, 255, 255, 0);
+                            svg {
+                                position: relative;
+                                top: 10%;
+                                left: 10%;
+                                height: 80%;
+                                width: 80%;
+                            }
+                        }
+                        &:hover,
+                        &.active {
+                            span {
+                                display: unset;
+                            }
+                            .icon {
+                                width: 35px;
+                                height: 35px;
+                                background-color: rgba(255, 255, 255, 1);
+                            }
+                        }
+                        &:nth-child(1) .icon {
+                            left: 50%;
+                            top: 5%;
+                            transform: translateX(-50%);
+                        }
+                        &:nth-child(2) .icon {
+                            bottom: 15%;
+                            left: 15%;
+                        }
+                        &:nth-child(3) .icon {
+                            bottom: 15%;
+                            right: 15%;
+                        }
+                    }
+                }
+                &.primary {
+                    .area-title {
+                        color: $primary;
+                    }
+                    .circle {
+                        background-color: $primary;
+                        .sub-area:hover .icon,
+                        .sub-area.active .icon {
+                            color: $primary;
+                        }
+                    }
+                }
+                &.tertiary {
+                    .area-title {
+                        color: $tertiary;
+                    }
+                    .circle {
+                        background-color: $tertiary;
+                        .sub-area:hover .icon,
+                        .sub-area.active .icon {
+                            color: $tertiary;
+                        }
+                    }
+                }
+                &.quaternary {
+                    .area-title {
+                        color: $quaternary;
+                    }
+                    .circle {
+                        background-color: $quaternary;
+                        .sub-area:hover .icon,
+                        .sub-area.active .icon {
+                            color: $quaternary;
+                        }
+                    }
+                }
+            }
+        }
+        .inputBox {
+            position: relative;
+            height: 65px;
+            input,
+            select {
+                height: 30px;
+                position: relative;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 100%;
+                padding: 0 10px;
+                font-size: 16px;
+                margin-bottom: 15px;
+                color: $tertiary;
+                border: 1px solid rgba(0, 0, 0);
+                outline: none;
+                background: transparent;
+                &:focus ~ label,
+                &:valid ~ label {
+                    top: 0;
+                    transform: translateY(0);
+                    left: 0;
+                    font-size: 14px;
+                }
+            }
+            label {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                left: 10px;
+                font-size: 16px;
+                color: $tertiary;
+                pointer-events: none;
+                transition: 0.5s;
+                &.no-animate {
+                    top: 0;
+                    transform: translateY(0);
+                    left: 0;
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+    .areas {
+        padding: 0 30px;
+        height: calc(100% - 40px);
+        .new{
+            height: 40px;
+            position: relative;
+            .btn{
+                color: white;
+                position: absolute;
+                right: 30px;
+            }
+        }
+        .area {
+            padding-bottom: 15px;
+            height: 33%;
+            .cuy-img {
+                height: 100%;
+                img {
+                    height: 90%;
+                    width: 90%;
+                }
+            }
+            .habits-list {
+                height: 100%;
+                .card {
+                    max-height: 100%;
+                    .card-header {
+                        padding: 6px 20px;
+                    }
+                    .card-body {
+                        overflow-y: scroll;
+                        padding: 10px 0;
+                        .empty {
+                            padding: 3% 5%;
+                            color: rgba(0, 0, 0, 0.2);
+                            .empty-icon svg {
+                                height: 50px;
+                                width: 50px;
+                            }
+                            .empty-text {
+                                text-align: center;
+                            }
+                        }
+                        .habit {
+                            padding: 0 15px;
+                            .habit-item {
+                                text-transform: capitalize;
+                                position: relative;
+                                color: $tertiary;
+                                padding: 0.5rem;
+                                padding-right: 30px;
+                                border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+                                cursor: pointer;
+                                transition: 0.3s;
+                                .icon {
+                                    position: absolute;
+                                    right: 5px;
+                                    svg {
+                                        height: 25px;
+                                        width: 25px;
+                                    }
+                                }
+                                &:hover,
+                                &.active {
+                                    font-size: 18px;
+                                    border-radius: 10px;
+                                }
+                            }
+                            &:nth-child(odd) {
+                                border-right: 1px solid rgba(0, 0, 0, 0.1);
+                            }
+                        }
+                    }
+                    &.primary {
+                        .card-header {
+                            background-color: $primary;
+                            color: white;
+                        }
+                        .habit-item {
+                            .icon {
+                                color: $primary;
+                            }
+                            &:hover,
+                            &.active {
+                                background-color: $primary;
+                                color: white;
+                                .icon {
+                                    color: white;
+                                }
+                            }
+                        }
+                    }
+                    &.tertiary {
+                        .card-header {
+                            background-color: $tertiary;
+                            color: white;
+                        }
+                        .habit-item {
+                            .icon {
+                                color: $tertiary;
+                            }
+                            &:hover,
+                            &.active {
+                                background-color: $tertiary;
+                                color: white;
+                                .icon {
+                                    color: white;
+                                }
+                            }
+                        }
+                    }
+                    &.quaternary {
+                        .card-header {
+                            background-color: $quaternary;
+                            color: white;
+                        }
+                        .habit-item {
+                            .icon {
+                                color: $quaternary;
+                            }
+                            &:hover,
+                            &.active {
+                                background-color: $quaternary;
+                                color: white;
+                                .icon {
+                                    color: white;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

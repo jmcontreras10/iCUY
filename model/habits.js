@@ -45,6 +45,8 @@ class Habit {
 
     this.subarea = parseInt(habit.subarea);
 
+    this.unit = habit.unit;
+
     /**
          * For the Unique value, the database actually verifies if (title, userEmail) to be unique
          */

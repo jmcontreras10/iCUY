@@ -27,7 +27,7 @@ function App() {
       .then(async usr => {
         setUser(usr);
         if (usr) {
-          let sock = new WebSocket(location.origin.replace(/^http/, 'ws'));
+          let sock = new WebSocket(window.location.origin.replace(/^http/, 'ws'));
           sock.onopen = () => {
             setSocket(sock);
           }

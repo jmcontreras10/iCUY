@@ -5,14 +5,12 @@ import CuyGraph from './CuyGraph'
 
 function Home(props) {
 
-    const [select, setSelect] = useState(0)
     const [todayH, setTodayH] = useState(0);
 
     useEffect(() => {
         let d = new Date();
         let actualDate = `${d.getDate()}-${d.getMonth() + 1}-${d.getFullYear()}`;
-        let today = props.records.filter(ele => ele.date == actualDate);
-        console.log(today)
+        let today = props.records.filter(ele => ele.date === actualDate);
         setTodayH(today.length);
     },[props.records])
 

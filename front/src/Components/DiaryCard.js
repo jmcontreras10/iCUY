@@ -10,7 +10,7 @@ const DiaryCard = (props) => {
     const [third, setThird] = useState([])
     const [available, setAvailable] = useState(0);
     const [inputs, setInputs] = useState({})
-    const [areas, setAreas] = useState([
+    const areas = [
         {
             title: "Salud",
             codigos: [1, 2, 3],
@@ -38,16 +38,15 @@ const DiaryCard = (props) => {
                 "Trabajo Principal"
             ]
         }
-    ]);
+    ]
 
     const updateRecord = (inp) => {
         let d = new Date();
         let actualDate = `${d.getDate()}-${d.getMonth() + 1}-${d.getFullYear()}`;
-        let today = props.records.filter(ele => ele.date == actualDate);
+        let today = props.records.filter(ele => ele.date === actualDate);
         let copy = inp ? inp : { ...inputs };
         let keys = Object.keys(copy)
-        console.log(today, keys)
-        today.map((ele) => {
+        today.forEach((ele) => {
             if (keys.includes(ele.habitTitle)) {
                 copy[ele.habitTitle] = ele.value;
             }
@@ -142,8 +141,7 @@ const DiaryCard = (props) => {
         setThird(data);
         setAvailable(count);
         setInputs(copy);
-        updateRecord(copy);
-    }, [areas, props.area, props.habits]);
+    }, [ props.area, props.habits]);
 
     useEffect(updateRecord, [props.records])
 
@@ -162,7 +160,6 @@ const DiaryCard = (props) => {
                 copy[title] = input.value
                 break;
         }
-        console.log('set input', input, copy)
 
         setInputs(copy);
     }
@@ -174,7 +171,6 @@ const DiaryCard = (props) => {
             habitTitle: title,
             value: inputs[title]
         }
-        console.log(inputs);
         fetch('/records', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import PropTypes from "prop-types";
 import Salud from "../assets/Salud.svg";
 import Relaciones from "../assets/Relaciones.svg";
@@ -11,15 +11,12 @@ import {
     GiBriefcase,
     GiGraduateCap,
     GiCherish,
-    GiMedallist,
     GiLovers,
     GiThreeFriends,
     GiBeamsAura
 } from 'react-icons/gi'
 import GraphNumber from './GraphNumber';
 import GraphHour from './GraphHour';
-import { icons } from 'react-icons/lib/cjs';
-import { set } from 'd3';
 
 const Habit = (props) => {
     const icons = [
@@ -33,7 +30,7 @@ const Habit = (props) => {
         <GiCherish />,
         <GiBriefcase />,
     ]
-    const [areas, setAreas] = useState([
+    const areas=[
         {
             title: "Salud",
             codigos: [1, 2, 3],
@@ -64,7 +61,7 @@ const Habit = (props) => {
                 "Principal"
             ]
         }
-    ]);
+    ];
     const [newHabit, setNewHabit] = useState(false);
     const [inputs, setInputs] = useState(null);
 
@@ -84,7 +81,6 @@ const Habit = (props) => {
         setInputs(copy);
     }
     const saveHabit = () => {
-        console.log(inputs)
         fetch('/habits', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -277,8 +273,8 @@ const Habit = (props) => {
                                     </div>
                                 </div>
                                 <div className="row graph">
-                                    {inputs.inputType == 'number' ? <GraphNumber data={props.records} habit={inputs.title}/>:
-                                     inputs.inputType=='time'?<GraphHour data={props.records} habit={inputs.title}/>:""}
+                                    {inputs.inputType === 'number' ? <GraphNumber data={props.records} habit={inputs.title}/>:
+                                     inputs.inputType ==='time'?<GraphHour data={props.records} habit={inputs.title}/>:""}
                             </div>
                             </>
                             :

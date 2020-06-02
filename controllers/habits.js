@@ -28,7 +28,6 @@ exports.create = async (req, res) => {
     errMessage = await validateEmail(inputHabit.userEmail);
 
   //  TODO: ( userEmail ) must exists and be valid - V5
-  console.log(errMessage,inputHabit)
   if (!errMessage) {
     const habit = new Habit(inputHabit);
     habit.addNew()

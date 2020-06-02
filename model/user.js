@@ -7,7 +7,6 @@ class User {
 
   constructor(user) {
     if (user) {
-      console.log(user._id,user);
       /**
        * The user's _id
        * Required

@@ -17,7 +17,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [habits, setHabits] = useState([]);
   const [records, setRecords] = useState([]);
-  const [pupils, setPupils] = useState({});
+  const [pupils, setPupils] = useState(null);
   const [socket, setSocket] = useState(null);
 
 
@@ -44,22 +44,21 @@ function App() {
           if(usr.pupils){
             let pups={};
             let promises=[];
-            usr.pupils.map((pup)=>{
+            usr.pupils.forEach((pup)=>{
               pups[pup]={}
-              console.log("pup", pups)
               promises.push(fetch(`/habits/filter?userEmail=${pup}`)
-                .then(res => res.json())
-                .then(hab => {
-                  pups[pup].habits=hab;
-                }));
+              .then(res => res.json())
+              .then(hab => {
+                pups[pup].habits=hab;
+              }));
               promises.push(fetch(`/records/filter?userEmail=${pup}`)
-                .then(res => res.json())
-                .then(recs => {
-                  let d = new Date();
-                  let actualDate = `${d.getDate()}-${d.getMonth() + 1}-${d.getFullYear()}`;
-                  let today = recs.filter(ele => ele.date == actualDate);
-                  pups[pup].records=today;
-                }));
+              .then(res => res.json())
+              .then(recs => {
+                let d = new Date();
+                let actualDate = `${d.getDate()}-${d.getMonth() + 1}-${d.getFullYear()}`;
+                let today = recs.filter(ele => ele.date === actualDate);
+                pups[pup].records=today;
+              }));
             });
             Promise.all(promises).then(()=>{
               setPupils(pups);
@@ -72,26 +71,25 @@ function App() {
   }, [])
 
   useEffect(() => {
-    console.log("in socket",pupils)
     if (socket)
       socket.onmessage = (msg) => {
         let data = JSON.parse(msg.data);
-        if (data.operationType == "delete") {
+        if (data.operationType === "delete") {
           switch (data.ns.coll) {
             case "users":
-              if (data.documentKey._id == user._id) {
+              if (data.documentKey._id === user._id) {
                 window.location.reload()
               }
               break;
             case "habits":
-              let habs = habits.filter(ele => ele._id != data.documentKey._id);
+              let habs = habits.filter(ele => ele._id !== data.documentKey._id);
               if (habs.length < habits.length) {
                 setHabits(habs);
               }
               else{
                 // let cambio = false;
                 // let res = pupils.map(pup=>{
-                //   let n = pup.filter(ele => ele._id != data.documentKey._id)
+                //   let n = pup.filter(ele => ele._id !== data.documentKey._id)
                 //   if (n.length < pup.length){
                 //     cambio = true;
                 //     return n;
@@ -103,7 +101,7 @@ function App() {
               }
               break;
             case "records":
-              let recs = records.filter(ele => ele._id != data.documentKey._id );
+              let recs = records.filter(ele => ele._id !== data.documentKey._id );
               if(recs.length<records.length){
                 setRecords(recs);
               }
@@ -113,18 +111,18 @@ function App() {
               break;
           }
         }
-        else if (data.fullDocument.email == user.email || data.fullDocument.userEmail == user.email) {
+        else if (data.fullDocument.email === user.email || data.fullDocument.userEmail === user.email) {
           switch (data.ns.coll) {
             case "users":
               setUser(data.fullDocument);
               break;
             case "habits":
-              let rhabs= habits.filter(ele => ele._id != data.documentKey._id );
+              let rhabs= habits.filter(ele => ele._id !== data.documentKey._id );
               rhabs.push(data.fullDocument)
               setHabits(rhabs);
               break;
             case "records":
-              let rrecs = records.filter(ele => ele._id != data.documentKey._id);
+              let rrecs = records.filter(ele => ele._id !== data.documentKey._id);
               rrecs.push(data.fullDocument);
               setRecords(rrecs);
               break;

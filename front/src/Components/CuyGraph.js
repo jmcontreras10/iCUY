@@ -15,10 +15,9 @@ const CuyGraph = (props) => {
                 width: targetRef.current.offsetWidth,
                 height: 50
             });
-            console.log(props.completed, props.total)
-            if (props.completed !== undefined && props.total !== undefined){
-            const a = props.completed / props.total;
-            setCurrentState(a.toFixed(2));
+            if (props.completed && props.total) {
+                const a = props.total===0?0:props.completed / props.total;
+                setCurrentState(a.toFixed(2));
             }
         }
     }, [props.completed, props.total]);
@@ -58,16 +57,16 @@ const CuyGraph = (props) => {
 
     progress.transition()
         .duration(1000)
-        .attr('width', currentState * dimensions.width - 50);
+        .attr('width', currentState * dimensions.width < 50 ? 0 : currentState * dimensions.width - 50);
 
     cuy.transition()
         .duration(1000)
-        .attr('x', currentState * dimensions.width - 75);
+        .attr('x', currentState * dimensions.width < 75 ? 0 : currentState * dimensions.width  - 75);
 
-    const goal = svg.append('image')
+    svg.append('image')
         .attr("xlink:href", imgF)
         .attr('width', 30)
-        .attr('x', dimensions.width - 60)
+        .attr('x', dimensions.width < 60 ? 0 :dimensions.width - 60)
         .attr('y', 0);
 
     const svgCompl = d3.select('.progressNumber')

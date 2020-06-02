@@ -58,7 +58,6 @@ class Habit {
     const db = getDb();
     //  Returning response from habit creation
     return fetchFilter(this.title,this.userEmail).then(res => {
-      console.log(res, this);
       if (res.length > 0) {
         return db
           .collection("habits")

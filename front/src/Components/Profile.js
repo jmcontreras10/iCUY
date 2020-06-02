@@ -101,8 +101,9 @@ function Profile(props) {
                                     <hr></hr>
                                     <div className="row habits-list no-gutters ">
                                         {
-                                            props.user.pupils.length > 0 ? (
+                                            props.user.pupils.length > 0 && props.pupils ? (
                                                 props.user.pupils.map((ele, i) => {
+                                                    console.log(ele,i,props.pupils)
                                                     return (
                                                         <div className="col-12 pupil" key={`profile-pupil-${i}`}>
                                                             <span className=" title">

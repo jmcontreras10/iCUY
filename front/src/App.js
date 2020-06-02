@@ -27,14 +27,13 @@ function App() {
       .then(async usr => {
         setUser(usr);
         if (usr) {
-          let sock = new WebSocket("ws://localhost:3001");
+          let sock = new WebSocket(location.origin.replace(/^http/, 'ws'));
           sock.onopen = () => {
             setSocket(sock);
           }
           fetch(`/habits/filter?userEmail=${usr.email}`)
             .then(res => res.json())
             .then(hab => {
-              console.log(hab);
               setHabits(hab);
             });
           fetch(`/records/filter?userEmail=${usr.email}`)
@@ -46,10 +45,20 @@ function App() {
             let pups={};
             let promises=[];
             usr.pupils.map((pup)=>{
-              promises.push(fetch(`/habits/filter?userEmail=${pup.email}`)
+              pups[pup]={}
+              console.log("pup", pups)
+              promises.push(fetch(`/habits/filter?userEmail=${pup}`)
                 .then(res => res.json())
                 .then(hab => {
-                  pups[pup.email]=hab;
+                  pups[pup].habits=hab;
+                }));
+              promises.push(fetch(`/records/filter?userEmail=${pup}`)
+                .then(res => res.json())
+                .then(recs => {
+                  let d = new Date();
+                  let actualDate = `${d.getDate()}-${d.getMonth() + 1}-${d.getFullYear()}`;
+                  let today = recs.filter(ele => ele.date == actualDate);
+                  pups[pup].records=today;
                 }));
             });
             Promise.all(promises).then(()=>{
@@ -63,7 +72,7 @@ function App() {
   }, [])
 
   useEffect(() => {
-    console.log("in socket", user, habits, records,pupils)
+    console.log("in socket",pupils)
     if (socket)
       socket.onmessage = (msg) => {
         let data = JSON.parse(msg.data);
@@ -80,17 +89,17 @@ function App() {
                 setHabits(habs);
               }
               else{
-                let cambio = false;
-                let res = pupils.map(pup=>{
-                  let n = pup.filter(ele => ele._id != data.documentKey._id)
-                  if (n.length < pup.length){
-                    cambio = true;
-                    return n;
-                  }
-                  return pup;
-                });
-                if(cambio)
-                  setPupils(res);
+                // let cambio = false;
+                // let res = pupils.map(pup=>{
+                //   let n = pup.filter(ele => ele._id != data.documentKey._id)
+                //   if (n.length < pup.length){
+                //     cambio = true;
+                //     return n;
+                //   }
+                //   return pup;
+                // });
+                // if(cambio)
+                //   setPupils(res);
               }
               break;
             case "records":
@@ -105,7 +114,6 @@ function App() {
           }
         }
         else if (data.fullDocument.email == user.email || data.fullDocument.userEmail == user.email) {
-          console.log(data)
           switch (data.ns.coll) {
             case "users":
               setUser(data.fullDocument);
@@ -134,7 +142,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/platform">
-            {user ? <Base user={user} habits={habits} records={records} /> : <Redirect to="/login" />}
+            {user ? <Base user={user} habits={habits} records={records} pupils={pupils} /> : <Redirect to="/login" />}
           </Route>
           <Route path="/login">
             {user ? <Redirect to="/platform" /> : <Login />}

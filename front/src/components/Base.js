@@ -52,7 +52,7 @@ function Base(props) {
                     <Profile user={props.user} solicitudes={solicitudes}/>
                 </Route> */}
                         <Route path="/platform/profile">
-                            <Profile user={props.user} habits={props.habits} />
+                            <Profile user={props.user} habits={props.habits} pupils={props.pupils} />
                         </Route>
                         <Route path="/platform/habits">
                             <Habit user={props.user} habits={props.habits} records={props.records}/>
@@ -72,6 +72,7 @@ function Base(props) {
 Base.propTypes = {
     user: PropTypes.object.isRequired,
     habits: PropTypes.array.isRequired,
-    records: PropTypes.array.isRequired
+    records: PropTypes.array.isRequired,
+
 }
 export default Base;

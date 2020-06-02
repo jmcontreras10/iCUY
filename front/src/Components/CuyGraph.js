@@ -92,7 +92,7 @@ const CuyGraph = (props) => {
 
     return (
         <>
-            <div class="progressCuy" ref={targetRef}>Progress</div>
+            <div className="progressCuy" ref={targetRef}>Progress</div>
             <h5><strong>Progreso:{currentState * 100}%</strong></h5>
         </>
     )

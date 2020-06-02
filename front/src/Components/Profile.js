@@ -108,7 +108,7 @@ function Profile(props) {
                                                             <span className=" title">
                                                                 <strong>{ele}</strong>
                                                             </span>
-                                                            <CuyGraph completed={3} total={5} />
+                                                            <CuyGraph completed={props.pupils[ele].records.length} total={props.pupils[ele].habits.length} />
                                                             <hr></hr>
                                                         </div>
                                                     )

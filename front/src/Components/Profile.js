@@ -7,18 +7,6 @@ import CuyGraph from './CuyGraph'
 
 function Profile(props) {
     const [newSupervisor, setNewSupervisor] = useState(false);
-    // const saveHabit = () => {
-    //     console.log(inputs)
-    //     fetch('/habits', {
-    //         method: 'POST',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify(inputs)
-    //     }).then(() => {
-    //         setInputs(base);
-    //         setHabitEdit(false);
-    //     });
-    // }
-
     return (
         <div className="Profile">
             <div className="container">
@@ -103,7 +91,6 @@ function Profile(props) {
                                         {
                                             props.user.pupils.length > 0 && props.pupils ? (
                                                 props.user.pupils.map((ele, i) => {
-                                                    console.log(ele,i,props.pupils)
                                                     return (
                                                         <div className="col-12 pupil" key={`profile-pupil-${i}`}>
                                                             <span className=" title">

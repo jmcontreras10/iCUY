@@ -20,7 +20,8 @@ function App() {
   const [pupils, setPupils] = useState(null);
   const [socket, setSocket] = useState(null);
 
-
+// Code review antoine noreau: Session management works well. Good job!
+//  For your web socket, I guess your URL is causing problems (maybe refresh ones) because it's set to localhost. Should change it for heroku deployment.
   useEffect(() => {
     fetch("/auth/user")
       .then(res => res.json())

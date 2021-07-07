@@ -255,6 +255,8 @@ const DiaryCard = (props) => {
         }
         return '';
     }
+    // Code review antoine noreau: Fonts are making it hard to read titles. Low contrats with multicolor styling. Would work better with white header
+    // Also, opening and closing tabs (cards collapse or show) trigger a graph re-render (that changes it's height). I guess it's a basic CSS fix.
     return (
         <div className=" DiaryCard card">
             <div className={`card-header ${props.area === 0 ? "" : "collapsed"}`} data-toggle="collapse" data-target={`#collapse${props.area}`} aria-expanded="true" aria-controls={`collapse${props.area}`} tabIndex={0}>
